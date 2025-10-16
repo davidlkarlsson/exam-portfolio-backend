@@ -3,6 +3,7 @@ package com.david.examportfolio.exam_portfolio_backend.model;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "projects")
@@ -11,11 +12,15 @@ public class Project {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(length = 50, nullable = false)
     private String title;
+    @Column(length = 100, nullable = false)
     private String description;
+    @Column(length = 200, nullable = false)
     private String imageUrl;
+    @Column(length = 100, nullable = false)
     private String githubUrl;
-    private LocalDate createdDate = LocalDate.now();
+    private LocalDateTime createdDate = LocalDateTime.now();
 
     public Project() {
     }
@@ -25,7 +30,7 @@ public class Project {
         this.description = description;
         this.imageUrl = imageUrl;
         this.githubUrl = githubUrl;
-        this.createdDate = LocalDate.now();
+        this.createdDate = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -64,12 +69,8 @@ public class Project {
         this.githubUrl = githubUrl;
     }
 
-    public LocalDate getCreatedDate() {
+    public LocalDateTime getCreatedDate() {
         return createdDate;
-    }
-
-    public void setCreatedDate(LocalDate createdDate) {
-        this.createdDate = createdDate;
     }
 
 }

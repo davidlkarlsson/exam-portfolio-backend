@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/api/projects")
+@RequestMapping("/api/v1")
 public class ProjectController {
 
     private final ProjectService projectService;
@@ -19,7 +19,7 @@ public class ProjectController {
         this.projectService = projectService;
     }
 
-    @GetMapping("/all")
+    @GetMapping("/public/projects")
     public ResponseEntity<List<Project>> getAllProjects() {
 
         List<Project> projects = projectService.getAllProjects();
@@ -30,7 +30,7 @@ public class ProjectController {
         return ResponseEntity.ok(projects);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/public/projects/{id}")
     public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
 
         Optional<Project> project = projectService.getProjectById(id);
@@ -41,7 +41,7 @@ public class ProjectController {
         return ResponseEntity.notFound().build();
     }
 
-    @PostMapping("/create")
+    @PostMapping("/admin/projects/create")
     public ResponseEntity<Project> createProject(@RequestBody Project project) {
 
         Project createdProject = projectService.createProject(project);
@@ -49,7 +49,7 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProject);
     }
 
-    @PatchMapping("/update/{id}")
+    @PatchMapping("/admin/projects/update/{id}")
     public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project project) {
 
         try {
@@ -61,7 +61,7 @@ public class ProjectController {
         }
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/admin/projects/delete/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
 
         try {
