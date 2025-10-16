@@ -1,5 +1,8 @@
 package com.david.examportfolio.exam_portfolio_backend.controller;
 
+import com.david.examportfolio.exam_portfolio_backend.dto.CreateProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.dto.ResponseProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.mapper.ProjectMapper;
 import com.david.examportfolio.exam_portfolio_backend.model.Project;
 import com.david.examportfolio.exam_portfolio_backend.service.ProjectService;
 import org.springframework.http.HttpStatus;
@@ -14,9 +17,11 @@ import java.util.Optional;
 public class ProjectController {
 
     private final ProjectService projectService;
+    private final ProjectMapper projectMapper;
 
-    public ProjectController(ProjectService projectService) {
+    public ProjectController(ProjectService projectService, ProjectMapper projectMapper) {
         this.projectService = projectService;
+        this.projectMapper = projectMapper;
     }
 
     @GetMapping("/public/projects")
@@ -42,11 +47,11 @@ public class ProjectController {
     }
 
     @PostMapping("/admin/projects/create")
-    public ResponseEntity<Project> createProject(@RequestBody Project project) {
+    public ResponseEntity<ResponseProjectDTO> createProject(@RequestBody CreateProjectDTO createProjectDTO) {
 
-        Project createdProject = projectService.createProject(project);
+        Project project = projectService.createProject(createProjectDTO);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdProject);
+        return ResponseEntity.status(HttpStatus.CREATED).body(projectMapper.toResponseProjectDTO(project));
     }
 
     @PatchMapping("/admin/projects/update/{id}")

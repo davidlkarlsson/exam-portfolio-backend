@@ -1,10 +1,13 @@
 package com.david.examportfolio.exam_portfolio_backend.service;
 
+import com.david.examportfolio.exam_portfolio_backend.dto.CreateProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.mapper.ProjectMapper;
 import com.david.examportfolio.exam_portfolio_backend.model.Project;
 import com.david.examportfolio.exam_portfolio_backend.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,10 +15,12 @@ import java.util.Optional;
 public class ProjectService {
 
     private final ProjectRepository projectRepository;
+    private final ProjectMapper projectMapper;
 
     @Autowired
-    public ProjectService(ProjectRepository projectRepository) {
+    public ProjectService(ProjectRepository projectRepository, ProjectMapper projectMapper) {
         this.projectRepository = projectRepository;
+        this.projectMapper = projectMapper;
     }
 
     public List<Project> getAllProjects() {
@@ -25,8 +30,9 @@ public class ProjectService {
     public Optional<Project> getProjectById(Long id) {
         return projectRepository.findById(id);
     }
-    public Project createProject(Project project) {
-        return projectRepository.save(project);
+
+    public Project createProject(CreateProjectDTO createProjectDTO) {
+        return projectRepository.save(projectMapper.toEntity(createProjectDTO));
     }
 
     public Project updateProject(Long id, Project updatedProject) {

@@ -1,26 +1,40 @@
 package com.david.examportfolio.exam_portfolio_backend.model;
 
 import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
+@EntityListeners(AuditingEntityListener.class)
 @Table(name = "projects")
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column(length = 50, nullable = false)
     private String title;
-    @Column(length = 100, nullable = false)
-    private String description;
+
     @Column(length = 200, nullable = false)
+    private String description;
+
+    @Column(name = "image_url")
     private String imageUrl;
-    @Column(length = 100, nullable = false)
+
+    @Column(name = "github_url")
     private String githubUrl;
-    private LocalDateTime createdDate = LocalDateTime.now();
+
+    @CreatedDate
+    @Column(name = "created_date", updatable = false)
+    private LocalDateTime createdDate;
+
+    @LastModifiedDate
+    @Column(name = "last_modified_date")
+    private LocalDateTime lastModifiedDate;
 
     public Project() {
     }
@@ -30,7 +44,6 @@ public class Project {
         this.description = description;
         this.imageUrl = imageUrl;
         this.githubUrl = githubUrl;
-        this.createdDate = LocalDateTime.now();
     }
 
     public Long getId() {
@@ -73,4 +86,7 @@ public class Project {
         return createdDate;
     }
 
+    public LocalDateTime getLastModifiedDate() {
+        return lastModifiedDate;
+    }
 }
