@@ -1,8 +1,9 @@
-package com.david.examportfolio.exam_portfolio_backend.dto;
+package com.david.examportfolio.exam_portfolio_backend.dto.admin;
 
 import java.time.LocalDateTime;
 
-public record ResponseProjectDTO(
+public record AdminProjectDTO(
+        Long id,
         String title,
         String description,
         String imageUrl,

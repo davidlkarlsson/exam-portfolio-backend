@@ -1,83 +1,71 @@
 package com.david.examportfolio.exam_portfolio_backend.controller;
 
-import com.david.examportfolio.exam_portfolio_backend.dto.CreateProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.dto.ResponseProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.mapper.ProjectMapper;
-import com.david.examportfolio.exam_portfolio_backend.model.Project;
+import com.david.examportfolio.exam_portfolio_backend.dto.admin.AdminProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.dto.admin.RequestProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.dto.user.ResponseProjectDTO;
 import com.david.examportfolio.exam_portfolio_backend.service.ProjectService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/api/v1")
 public class ProjectController {
 
     private final ProjectService projectService;
-    private final ProjectMapper projectMapper;
 
-    public ProjectController(ProjectService projectService, ProjectMapper projectMapper) {
+    public ProjectController(ProjectService projectService) {
         this.projectService = projectService;
-        this.projectMapper = projectMapper;
     }
 
     @GetMapping("/public/projects")
-    public ResponseEntity<List<Project>> getAllProjects() {
+    public ResponseEntity<List<ResponseProjectDTO>> getAllProjects() {
 
-        List<Project> projects = projectService.getAllProjects();
+        List<ResponseProjectDTO> projects = projectService.getAllProjects();
 
-        if (projects.isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok(projects);
     }
 
-    @GetMapping("/public/projects/{id}")
-    public ResponseEntity<Project> getProjectById(@PathVariable Long id) {
+    @GetMapping("/admin/projects/getall")
+    public ResponseEntity<List<AdminProjectDTO>> getAllAdminProjects() {
 
-        Optional<Project> project = projectService.getProjectById(id);
+        List<AdminProjectDTO> projects = projectService.getAllAdminProjects();
 
-        if (project.isPresent()) {
-            return ResponseEntity.ok(project.get());
-        }
-        return ResponseEntity.notFound().build();
+        return ResponseEntity.ok(projects);
+    }
+
+    @GetMapping("/admin/projects/{id}")
+    public ResponseEntity<AdminProjectDTO> getProjectById(@PathVariable Long id) {
+
+        AdminProjectDTO project = projectService.getProjectById(id);
+
+        return ResponseEntity.ok().body(project);
     }
 
     @PostMapping("/admin/projects/create")
-    public ResponseEntity<ResponseProjectDTO> createProject(@RequestBody CreateProjectDTO createProjectDTO) {
+    public ResponseEntity<ResponseProjectDTO> createProject(@RequestBody RequestProjectDTO requestProjectDTO) {
 
-        Project project = projectService.createProject(createProjectDTO);
+        ResponseProjectDTO project = projectService.createProject(requestProjectDTO);
 
-        return ResponseEntity.status(HttpStatus.CREATED).body(projectMapper.toResponseProjectDTO(project));
+        return ResponseEntity.status(HttpStatus.CREATED).body(project);
     }
 
     @PatchMapping("/admin/projects/update/{id}")
-    public ResponseEntity<Project> updateProject(@PathVariable Long id, @RequestBody Project project) {
+    public ResponseEntity<ResponseProjectDTO> updateProject(@PathVariable Long id, @RequestBody RequestProjectDTO project) {
 
-        try {
-            Project updatedProject = projectService.updateProject(id, project);
+            ResponseProjectDTO updatedProject = projectService.updateProject(id, project);
+
             return ResponseEntity.ok(updatedProject);
-            }
-        catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
 
     @DeleteMapping("/admin/projects/delete/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
 
-        try {
             projectService.deleteProject(id);
+
             return ResponseEntity.noContent().build();
-            }
-        catch (RuntimeException e) {
-            return ResponseEntity.notFound().build();
-        }
     }
-
-
-
 }

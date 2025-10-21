@@ -1,20 +1,23 @@
 package com.david.examportfolio.exam_portfolio_backend.mapper;
 
-import com.david.examportfolio.exam_portfolio_backend.dto.CreateProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.dto.ResponseProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.dto.admin.AdminProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.dto.admin.RequestProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.dto.user.ResponseProjectDTO;
 import com.david.examportfolio.exam_portfolio_backend.model.Project;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 
 @Component
 public class ProjectMapper {
 
-    public Project toEntity(CreateProjectDTO createProjectDTO) {
+    public Project toEntity(RequestProjectDTO requestProjectDTO) {
         return new Project(
-                createProjectDTO.title(),
-                createProjectDTO.description(),
-                createProjectDTO.imageUrl(),
-                createProjectDTO.githubUrl()
+                requestProjectDTO.title(),
+                requestProjectDTO.description(),
+                requestProjectDTO.imageUrl(),
+                requestProjectDTO.githubUrl()
         );
     }
 
@@ -28,5 +31,30 @@ public class ProjectMapper {
                 project.getCreatedDate(),
                 project.getLastModifiedDate()
         );
+    }
+
+    public AdminProjectDTO toAdminProjectDTO(Project project) {
+
+        return new AdminProjectDTO(
+                project.getId(),
+                project.getTitle(),
+                project.getDescription(),
+                project.getImageUrl(),
+                project.getGithubUrl(),
+                project.getCreatedDate(),
+                project.getLastModifiedDate()
+        );
+    }
+
+    public List<ResponseProjectDTO> toResponseProjectDTOList(List<Project> projects) {
+        return projects.stream()
+                .map(this::toResponseProjectDTO)
+                .toList();
+    }
+
+    public List<AdminProjectDTO> toAdminProjectDTOList(List<Project> projects) {
+        return projects.stream()
+                .map(this::toAdminProjectDTO)
+                .toList();
     }
 }
