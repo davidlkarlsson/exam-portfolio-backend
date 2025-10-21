@@ -4,6 +4,7 @@ import com.david.examportfolio.exam_portfolio_backend.dto.admin.AdminProjectDTO;
 import com.david.examportfolio.exam_portfolio_backend.dto.admin.RequestProjectDTO;
 import com.david.examportfolio.exam_portfolio_backend.dto.user.ResponseProjectDTO;
 import com.david.examportfolio.exam_portfolio_backend.service.ProjectService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -46,7 +47,7 @@ public class ProjectController {
     }
 
     @PostMapping("/admin/projects/create")
-    public ResponseEntity<ResponseProjectDTO> createProject(@RequestBody RequestProjectDTO requestProjectDTO) {
+    public ResponseEntity<ResponseProjectDTO> createProject(@Valid @RequestBody RequestProjectDTO requestProjectDTO) {
 
         ResponseProjectDTO project = projectService.createProject(requestProjectDTO);
 

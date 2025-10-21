@@ -1,11 +1,13 @@
 package com.david.examportfolio.exam_portfolio_backend.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
@@ -28,11 +30,14 @@ public class Project {
     @Column(name = "github_url")
     private String githubUrl;
 
+    // TODO - Check out formatting of JSON, what's wrong?
     @CreatedDate
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "created_date", updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
+    //@JsonFormat(pattern = "yyyy-MM-dd HH:mm")
     @Column(name = "last_modified_date")
     private LocalDateTime lastModifiedDate;
 
