@@ -73,10 +73,13 @@ public class ProjectService {
 
         return projectRepository.findById(id)
                 .map(existing -> {
-                    existing.setTitle(projectMapper.toEntity(updatedProject).getTitle());
-                    existing.setDescription(projectMapper.toEntity(updatedProject).getDescription());
-                    existing.setImageUrl(projectMapper.toEntity(updatedProject).getImageUrl());
-                    existing.setGithubUrl(projectMapper.toEntity(updatedProject).getGithubUrl());
+                    Project updated = projectMapper.toEntity(updatedProject);
+
+                    existing.setTitle(updated.getTitle());
+                    existing.setDescription(updated.getDescription());
+                    existing.setImageUrl(updated.getImageUrl());
+                    existing.setGithubUrl(updated.getGithubUrl());
+
                     Project savedProject = projectRepository.save(existing);
                     return projectMapper.toResponseProjectDTO(savedProject);
                 })
