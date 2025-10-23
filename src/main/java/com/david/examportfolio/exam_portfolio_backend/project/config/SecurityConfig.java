@@ -1,4 +1,4 @@
-package com.david.examportfolio.exam_portfolio_backend.config;
+package com.david.examportfolio.exam_portfolio_backend.project.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

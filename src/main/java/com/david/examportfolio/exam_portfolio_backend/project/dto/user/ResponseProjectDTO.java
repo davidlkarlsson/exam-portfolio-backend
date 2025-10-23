@@ -1,4 +1,4 @@
-package com.david.examportfolio.exam_portfolio_backend.dto.user;
+package com.david.examportfolio.exam_portfolio_backend.project.dto.user;
 
 import java.time.LocalDateTime;
 

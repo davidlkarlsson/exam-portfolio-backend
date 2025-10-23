@@ -1,4 +1,4 @@
-package com.david.examportfolio.exam_portfolio_backend.model;
+package com.david.examportfolio.exam_portfolio_backend.project.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;

@@ -1,9 +1,9 @@
-package com.david.examportfolio.exam_portfolio_backend.mapper;
+package com.david.examportfolio.exam_portfolio_backend.project.mapper;
 
-import com.david.examportfolio.exam_portfolio_backend.dto.admin.AdminProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.dto.admin.RequestProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.dto.user.ResponseProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.model.Project;
+import com.david.examportfolio.exam_portfolio_backend.project.dto.admin.AdminProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.project.dto.admin.RequestProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.project.dto.user.ResponseProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.project.model.Project;
 import org.springframework.stereotype.Component;
 
 import java.util.List;

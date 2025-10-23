@@ -1,9 +1,9 @@
-package com.david.examportfolio.exam_portfolio_backend.controller;
+package com.david.examportfolio.exam_portfolio_backend.project.controller;
 
-import com.david.examportfolio.exam_portfolio_backend.dto.admin.AdminProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.dto.admin.RequestProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.dto.user.ResponseProjectDTO;
-import com.david.examportfolio.exam_portfolio_backend.service.ProjectService;
+import com.david.examportfolio.exam_portfolio_backend.project.dto.admin.AdminProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.project.dto.admin.RequestProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.project.dto.user.ResponseProjectDTO;
+import com.david.examportfolio.exam_portfolio_backend.project.service.ProjectService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

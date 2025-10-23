@@ -1,6 +1,6 @@
-package com.david.examportfolio.exam_portfolio_backend.repository;
+package com.david.examportfolio.exam_portfolio_backend.project.repository;
 
-import com.david.examportfolio.exam_portfolio_backend.model.Project;
+import com.david.examportfolio.exam_portfolio_backend.project.model.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

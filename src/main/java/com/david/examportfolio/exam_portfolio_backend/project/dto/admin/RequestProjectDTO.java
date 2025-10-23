@@ -1,4 +1,4 @@
-package com.david.examportfolio.exam_portfolio_backend.dto.admin;
+package com.david.examportfolio.exam_portfolio_backend.project.dto.admin;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
