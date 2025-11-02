@@ -14,7 +14,7 @@ public class EmailService {
     @Value("${resend.api.key}")
     private String resendApiKey;
 
-    @Value("${recipent}")
+    @Value("${recipient}")
     private String recipient;
 
 
