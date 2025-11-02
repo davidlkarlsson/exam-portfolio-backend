@@ -17,6 +17,10 @@ public record RequestContactDTO(
         String phone,
 
         @Email(message = "Must be a valid email address")
+        @Pattern(
+                regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$",
+                message = "Email must be in format example@domain.com"
+        )
         String email,
 
         String subject,
