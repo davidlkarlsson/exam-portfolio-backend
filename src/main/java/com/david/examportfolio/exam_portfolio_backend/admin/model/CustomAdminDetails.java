@@ -51,4 +51,8 @@ public class CustomAdminDetails implements UserDetails {
     public boolean isEnabled() {
         return customAdmin.isEnabled();
     }
+
+    public CustomAdmin getCustomAdmin() {
+        return customAdmin;
+    }
 }
