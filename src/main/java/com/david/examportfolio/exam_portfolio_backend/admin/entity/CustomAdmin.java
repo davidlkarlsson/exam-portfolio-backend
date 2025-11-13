@@ -1,9 +1,8 @@
-package com.david.examportfolio.exam_portfolio_backend.admin.model;
+package com.david.examportfolio.exam_portfolio_backend.admin.entity;
 
 
 import jakarta.persistence.*;
 
-import java.util.Set;
 import java.util.UUID;
 
 @Entity
