@@ -4,14 +4,14 @@ package com.david.examportfolio.exam_portfolio_backend.admin.service;
 import com.david.examportfolio.exam_portfolio_backend.admin.entity.CustomAdmin;
 import com.david.examportfolio.exam_portfolio_backend.admin.repository.CustomAdminRepository;
 import jakarta.annotation.PostConstruct;
-import lombok.extern.slf4j.Slf4j;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
 public class CustomAdminSetupService {
 
     private final CustomAdminRepository customAdminRepository;
@@ -23,6 +23,8 @@ public class CustomAdminSetupService {
     private String username;
     @Value("${security.admin.password}")
     private String password;
+
+    private final Logger log = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     public CustomAdminSetupService(CustomAdminRepository customAdminRepository, PasswordEncoder passwordEncoder) {
