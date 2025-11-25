@@ -33,7 +33,9 @@ public class AppSecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSec, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
 
-        httpSec.csrf(csrfConfigurer -> csrfConfigurer.disable())
+        httpSec
+                .cors(cors -> {})
+                .csrf(csrfConfigurer -> csrfConfigurer.disable())
                 .authorizeHttpRequests(auth -> auth
 
                         .requestMatchers("/api/v1/public/**").permitAll()
