@@ -24,6 +24,7 @@ public class ProjectMapper {
     public ResponseProjectDTO toResponseProjectDTO(Project project) {
 
         return new ResponseProjectDTO(
+                project.getId(),
                 project.getTitle(),
                 project.getDescription(),
                 project.getImageUrl(),
