@@ -5,10 +5,11 @@ import com.david.examportfolio.exam_portfolio_backend.admin.dto.LoginRequestDTO;
 import com.david.examportfolio.exam_portfolio_backend.admin.entity.CustomAdmin;
 import com.david.examportfolio.exam_portfolio_backend.admin.model.CustomAdminDetails;
 import com.david.examportfolio.exam_portfolio_backend.jwt.JwtUtils;
-import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -48,12 +49,14 @@ public class AuthController {
 
         String token = jwtUtils.generateJwtToken(customAdmin);
 
-        Cookie cookie = new Cookie("authtoken", token);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(3600);
-        response.addCookie(cookie);
+        ResponseCookie cookie = ResponseCookie.from("authtoken", token)
+        .httpOnly(true)
+        .secure(true)
+        .path("/")
+        .maxAge(3600)
+        .build();
+
+        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
 
         return ResponseEntity.ok(Map.of(
                 "message", "Login successful",
