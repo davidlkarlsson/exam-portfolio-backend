@@ -1,6 +1,7 @@
 package com.david.examportfolio.exam_portfolio_backend.contact.service;
 
 import com.david.examportfolio.exam_portfolio_backend.contact.dto.RequestContactDTO;
+import com.david.examportfolio.exam_portfolio_backend.contact.exception.EmailSendFailException;
 import com.resend.Resend;
 import com.resend.core.exception.ResendException;
 import com.resend.services.emails.model.CreateEmailOptions;
@@ -39,7 +40,7 @@ public class EmailService {
             CreateEmailResponse data = resend.emails().send(params);
             System.out.println("Email sent with ID: " + data.getId());
         } catch (ResendException e) {
-            e.printStackTrace();
+            throw new EmailSendFailException("Failed to send email", e);
         }
 
 

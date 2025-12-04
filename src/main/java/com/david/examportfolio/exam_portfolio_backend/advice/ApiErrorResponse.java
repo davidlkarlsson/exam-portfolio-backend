@@ -1,4 +1,4 @@
-package com.david.examportfolio.exam_portfolio_backend.project.exception;
+package com.david.examportfolio.exam_portfolio_backend.advice;
 
 import java.util.List;
 

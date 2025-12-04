@@ -1,5 +1,7 @@
-package com.david.examportfolio.exam_portfolio_backend.project.exception;
+package com.david.examportfolio.exam_portfolio_backend.advice;
 
+import com.david.examportfolio.exam_portfolio_backend.contact.exception.EmailSendFailException;
+import com.david.examportfolio.exam_portfolio_backend.project.exception.ProjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -15,6 +17,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<String> handleProjectNotFoundException(ProjectNotFoundException exception) {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(exception.getMessage());
     }
+
+    @ExceptionHandler (EmailSendFailException.class)
+    public ResponseEntity<String> handleEmailSendFailException(EmailSendFailException exception) {
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(exception.getMessage());
+    }
+
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiErrorResponse> handleValidationException(MethodArgumentNotValidException exception) {
