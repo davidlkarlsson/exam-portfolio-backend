@@ -49,7 +49,7 @@ public class AuthController {
 
         String token = jwtUtils.generateJwtToken(customAdmin);
 
-        ResponseCookie cookie = ResponseCookie.from("authtoken", token)
+        ResponseCookie cookie = ResponseCookie.from("authToken", token)
         .httpOnly(true)
         .secure(true)
         .path("/")
@@ -60,8 +60,8 @@ public class AuthController {
 
         return ResponseEntity.ok(Map.of(
                 "message", "Login successful",
-                "token", token,
-                "email", customAdmin.getEmail()
+                "email", customAdmin.getEmail(),
+                "username", customAdmin.getUsername()
         ));
     }
 }

@@ -55,6 +55,7 @@ public class JwtUtils {
 
         String token = Jwts.builder()
                 .subject(customAdmin.getEmail())
+                .claim("username", customAdmin.getUsername())
                 .claim("authorities", customAdmin.getRole())
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + jwtExpirationInMs))
@@ -66,7 +67,7 @@ public class JwtUtils {
         return token;
     }
 
-    public String getUsernameFromJwtToken(String token) {
+    public String getEmailFromJwtToken(String token) {
 
         try {
             Claims claims = Jwts.parser()
@@ -75,12 +76,27 @@ public class JwtUtils {
                     .parseSignedClaims(token)
                     .getPayload();
 
-            String username = claims.getSubject();
-            log.debug("Extracted username: '{}' from token:", username);
-            return username;
+            String email = claims.getSubject();
+            log.debug("Extracted email: '{}' from token:", email);
+            return email;
         }
         catch (Exception e) {
 
+            log.warn("Failed to extract username from token: {}", e.getMessage());
+            return null;
+        }
+    }
+
+    public String getUsernameFromJwtToken(String token) {
+        try {
+            Claims claims = Jwts.parser()
+                    .verifyWith(secretKey)
+                    .build()
+                    .parseSignedClaims(token)
+                    .getPayload();
+
+            return claims.get("username", String.class);
+        } catch (Exception e) {
             log.warn("Failed to extract username from token: {}", e.getMessage());
             return null;
         }

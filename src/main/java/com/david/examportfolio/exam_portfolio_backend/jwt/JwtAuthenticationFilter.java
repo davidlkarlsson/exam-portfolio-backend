@@ -56,12 +56,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         if (jwtUtils.validateJwtToken(token)) {
 
-            String username = jwtUtils.getUsernameFromJwtToken(token);
+            String email = jwtUtils.getEmailFromJwtToken(token);
             Optional<String> roles = jwtUtils.getRolesFromJwtToken(token);
 
-            if (username!= null && roles.isPresent() && SecurityContextHolder.getContext().getAuthentication() == null) {
+            if (email!= null && roles.isPresent() && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userDetailsService.loadUserByUsername(email);
 
                 log.debug("Authorities from database: {}", userDetails.getAuthorities());
 
@@ -73,11 +73,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
 
-                    log.debug("Authenticated user from DB: {}",username);
+                    log.debug("Authenticated user from DB: {}",email);
                 }
 
                 else  {
-                    log.warn("User not found/disabled in DB: {}",username);
+                    log.warn("User not found/disabled in DB: {}",email);
                 }
             }
             else  {
