@@ -30,7 +30,7 @@ public class ProjectController {
         return ResponseEntity.ok(projects);
     }
 
-    @GetMapping("/admin/projects/getall")
+    @GetMapping("/admin/projects/")
     public ResponseEntity<List<AdminProjectDTO>> getAllAdminProjects() {
 
         List<AdminProjectDTO> projects = projectService.getAllAdminProjects();
@@ -46,7 +46,7 @@ public class ProjectController {
         return ResponseEntity.ok().body(project);
     }
 
-    @PostMapping("/admin/projects/create")
+    @PostMapping("/admin/projects/")
     public ResponseEntity<ResponseProjectDTO> createProject(@Valid @RequestBody RequestProjectDTO requestProjectDTO) {
 
         ResponseProjectDTO project = projectService.createProject(requestProjectDTO);
@@ -54,7 +54,7 @@ public class ProjectController {
         return ResponseEntity.status(HttpStatus.CREATED).body(project);
     }
 
-    @PatchMapping("/admin/projects/update/{id}")
+    @PatchMapping("/admin/projects/{id}")
     public ResponseEntity<ResponseProjectDTO> updateProject(@PathVariable Long id, @RequestBody RequestProjectDTO project) {
 
             ResponseProjectDTO updatedProject = projectService.updateProject(id, project);
@@ -62,7 +62,7 @@ public class ProjectController {
             return ResponseEntity.ok(updatedProject);
     }
 
-    @DeleteMapping("/admin/projects/delete/{id}")
+    @DeleteMapping("/admin/projects/{id}")
     public ResponseEntity<Void> deleteProject(@PathVariable Long id) {
 
             projectService.deleteProject(id);

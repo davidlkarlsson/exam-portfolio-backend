@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/admin")
+@RequestMapping("/api/v1/public")
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
@@ -52,16 +52,18 @@ public class AuthController {
         ResponseCookie cookie = ResponseCookie.from("authToken", token)
         .httpOnly(true)
         .secure(true)
+        .sameSite("None")
         .path("/")
         .maxAge(3600)
         .build();
 
-        response.addHeader(HttpHeaders.SET_COOKIE, cookie.toString());
-
-        return ResponseEntity.ok(Map.of(
-                "message", "Login successful",
-                "email", customAdmin.getEmail(),
-                "username", customAdmin.getUsername()
-        ));
+        return ResponseEntity
+                .ok()
+                .header(HttpHeaders.SET_COOKIE, cookie.toString())
+                .body(Map.of(
+                        "message", "Login successful",
+                        "email", customAdmin.getEmail(),
+                        "username", customAdmin.getUsername()
+                ));
     }
 }
