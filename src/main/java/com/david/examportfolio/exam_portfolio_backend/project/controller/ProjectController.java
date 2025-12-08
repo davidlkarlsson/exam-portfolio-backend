@@ -30,7 +30,7 @@ public class ProjectController {
         return ResponseEntity.ok(projects);
     }
 
-    @GetMapping("/admin/projects/")
+    @GetMapping("/admin/projects")
     public ResponseEntity<List<AdminProjectDTO>> getAllAdminProjects() {
 
         List<AdminProjectDTO> projects = projectService.getAllAdminProjects();
@@ -46,7 +46,7 @@ public class ProjectController {
         return ResponseEntity.ok().body(project);
     }
 
-    @PostMapping("/admin/projects/")
+    @PostMapping("/admin/projects")
     public ResponseEntity<ResponseProjectDTO> createProject(@Valid @RequestBody RequestProjectDTO requestProjectDTO) {
 
         ResponseProjectDTO project = projectService.createProject(requestProjectDTO);
