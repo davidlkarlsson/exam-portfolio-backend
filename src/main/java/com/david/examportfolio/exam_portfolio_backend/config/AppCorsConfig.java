@@ -18,11 +18,11 @@ public class AppCorsConfig {
 
         //Whitelist
         corsConfiguration.setAllowedOrigins(List.of("http://localhost:3000", "https://exam-portfolio-frontend.onrender.com"));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PATCH"));
-        corsConfiguration. setAllowedHeaders (List.of("Content-Type" , "Authorization" ,
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "DELETE", "PATCH", "OPTIONS"));
+        corsConfiguration.setAllowedHeaders(List.of("Content-Type", "Authorization",
                 "X-Requested-With" ));
         corsConfiguration.setAllowCredentials(true); // Cookies enabled
-        corsConfiguration.setExposedHeaders(List.of("Set-Cookie"));
+        corsConfiguration.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
 
         // Backend related endpoints
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
