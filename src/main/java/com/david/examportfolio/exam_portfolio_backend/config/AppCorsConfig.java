@@ -22,7 +22,7 @@ public class AppCorsConfig {
         corsConfiguration.setAllowedHeaders(List.of("Content-Type", "Authorization",
                 "X-Requested-With" ));
         corsConfiguration.setAllowCredentials(true); // Cookies enabled
-        corsConfiguration.setExposedHeaders(List.of("Authorization", "Set-Cookie"));
+        corsConfiguration.setExposedHeaders(List.of("Set-Cookie"));
 
         // Backend related endpoints
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();

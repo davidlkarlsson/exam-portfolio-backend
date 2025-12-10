@@ -55,6 +55,7 @@ public class AuthController {
         .sameSite("None")
         .path("/")
         .maxAge(3600)
+        .partitioned(true)
         .build();
 
         return ResponseEntity
