@@ -40,7 +40,7 @@ public class EmailService {
             CreateEmailResponse data = resend.emails().send(params);
             System.out.println("Email sent with ID: " + data.getId());
         } catch (ResendException e) {
-            throw new EmailSendFailException("Failed to send email", e);
+            throw new EmailSendFailException("We couldn't send your message right now. Please try again later.", e);
         }
 
 

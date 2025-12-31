@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
 @RequestMapping("/api/v1")
 public class ContactController {
@@ -21,11 +23,13 @@ public class ContactController {
     }
 
     @PostMapping("/public/contact")
-    public ResponseEntity<Void> sendEmail(@Valid @RequestBody RequestContactDTO request) {
+    public ResponseEntity<Map<String, String>> sendEmail(@Valid @RequestBody RequestContactDTO request) {
 
         emailService.sendContactEmail(request);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(
+                Map.of("message", "Your message has been sent!")
+        );
     }
 
 }

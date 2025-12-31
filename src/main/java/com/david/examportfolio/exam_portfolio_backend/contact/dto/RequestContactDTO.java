@@ -8,12 +8,10 @@ import jakarta.validation.constraints.Size;
 public record RequestContactDTO(
 
         @NotBlank(message = "Name cannot be blank nor contain only whitespaces")
-        @Size(message = "Must contain between 5-50 chars", min = 1, max = 50)
+        @Size(message = "Must contain between 1-50 chars", min = 1, max = 50)
         String name,
 
-        @Pattern(
-                regexp = "^$|^[+]?[0-9\\s\\-\\(\\)]{5,20}$",
-                message = "Must be a valid phone number or empty")
+        @Size(max = 30)
         String phone,
 
         @Email(message = "Must be a valid email address")
