@@ -26,14 +26,14 @@ public class ProjectService {
 
     public List<ResponseProjectDTO> getAllProjects() {
 
-        List<Project> projects = projectRepository.findAll();
+        List<Project> projects = projectRepository.findAllByOrderByCreatedDateDesc();
 
         return projectMapper.toResponseProjectDTOList(projects);
     }
 
     public List<AdminProjectDTO> getAllAdminProjects() {
 
-        List<Project> projects = projectRepository.findAll();
+        List<Project> projects = projectRepository.findAllByOrderByCreatedDateDesc();
 
         return projectMapper.toAdminProjectDTOList(projects);
     }
