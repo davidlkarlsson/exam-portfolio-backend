@@ -5,7 +5,6 @@ import com.david.examportfolio.exam_portfolio_backend.admin.dto.LoginRequestDTO;
 import com.david.examportfolio.exam_portfolio_backend.admin.entity.CustomAdmin;
 import com.david.examportfolio.exam_portfolio_backend.admin.model.CustomAdminDetails;
 import com.david.examportfolio.exam_portfolio_backend.jwt.JwtUtils;
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
