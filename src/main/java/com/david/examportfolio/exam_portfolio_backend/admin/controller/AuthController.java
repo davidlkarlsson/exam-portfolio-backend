@@ -32,7 +32,7 @@ public class AuthController {
     }
 
     @PostMapping("public/login")
-    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO, HttpServletResponse response) {
+    public ResponseEntity<?> login(@Valid @RequestBody LoginRequestDTO loginRequestDTO) {
 
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
