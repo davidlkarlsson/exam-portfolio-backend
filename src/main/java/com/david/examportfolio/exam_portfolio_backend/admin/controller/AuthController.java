@@ -9,13 +9,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -64,22 +62,5 @@ public class AuthController {
                         "email", customAdmin.getEmail(),
                         "username", customAdmin.getUsername()
                 ));
-    }
-
-    @GetMapping("admin/me")
-    public ResponseEntity<?> getCurrentUser(@AuthenticationPrincipal CustomAdminDetails userDetails) {
-
-        if (userDetails == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
-                    .body(Map.of("error", "Not authenticated"));
-        }
-
-        CustomAdmin customAdmin = userDetails.getCustomAdmin();
-
-        return ResponseEntity.ok(Map.of(
-                "username", customAdmin.getUsername(),
-                "email", customAdmin.getEmail(),
-                "role", customAdmin.getRole()
-        ));
     }
 }
